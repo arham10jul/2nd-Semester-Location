@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+</head>
+<body>
+    <input type="button" value="click me" onclick="abc()">
+    
+</body>
+</html>
+<script>
+    function abc(){
+        if(navigator.geolocation)
+        {
+        navigator.geolocation.getCurrentPosition(my);
+        }
+    }
+
+    function my(position){
+        var lat=position.coords.latitude;
+        var long=position.coords.longitude;
+        var api="https://api.opencagedata.com/geocode/v1/json?q="+lat+","+long+"&key=87f70e732bbd44d984f351fc57d3e4cc";
+
+        $.get(api,function(data){
+            console.log(data);
+            document.write(data.results[0].components.country+" ")
+            document.write(data.results[0].components.city+" ")
+            document.write(data.results[0].components.neighbourhood)
+        })
+    }
+
+</script>
